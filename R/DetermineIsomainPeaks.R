@@ -51,7 +51,6 @@ DetermineIsomainPeaks <- function(spec=NULL, int_cutoff=0.03, dmz_cutoff=0.001, 
     } else {
       flt <- which(isomain[,"mz"]<=isomain[which.min(abs(isomain[,"mz"]-precursor)),"mz"])
     }
-    #browser()
     isomain <- isomain[flt,]
     n <- which(isomain[,"iso"]==0)
     # ensure that precursor is within list
@@ -70,7 +69,7 @@ DetermineIsomainPeaks <- function(spec=NULL, int_cutoff=0.03, dmz_cutoff=0.001, 
     if (length(isomain)>=1) {
       out <- isomain
     } else {
-      #fallback sollution if nothing remained
+      #fallback solution if nothing remained
       out <- spec[which.max(spec[,2]),1]
     }
   }

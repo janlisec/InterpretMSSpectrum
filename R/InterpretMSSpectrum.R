@@ -42,24 +42,25 @@
 #'     will be returned invisibly.
 #'
 #' @examples
-#' # load test data
+#' # load APCI test data
 #' utils::data(apci_spectrum)
-#'
-#' # provide information of a correct peak (if you know) as a character containing
-#' # name, formula and ion mass -- separated by ', ' as shown below
+#' 
+#' # (otional) provide information of a correct peak as a character containing
+#' name, formula and ion mass -- separated by ',' as shown below
 #' cp <- "Glutamic acid (3TMS), C14H33NO4Si3, 364.1790"
-#'
-#' # provide database of known peaks and correct peak
+#' 
+#' # (otional) provide a database of known peaks
 #' mdb <- data.frame(
 #'   "Name" = c("Glutamic acid (3TMS)", "other peak with same sum formula"),
 #'   "Formula" = c("C14H33NO4Si3", "C14H33NO4Si3"),
 #'   "M+H" = c(364.179, 364.179), stringsAsFactors = FALSE, check.names = FALSE
 #' )
 #' 
-#' # provide a database of precalculated formulas to speed up the process
+#' # (otional) provide a database of precalculated formulas to speed up the process
 #' fdb <- system.file("extdata", "APCI_min.db", package = "InterpretMSSpectrum")
-#'
-#' # apply function providing above arguments (dppm is set to 0.5 to reduce run time)
+#' 
+#' # apply function providing above arguments which will print to the console
+#' # and open a new plot
 #' InterpretMSSpectrum(spec=apci_spectrum, correct_peak=cp, met_db=mdb, formula_db=fdb)
 #'
 #' @export
@@ -197,6 +198,8 @@ InterpretMSSpectrum <- function(
         )
         formula_db <- NULL
       } else {
+        # $ToDo$ We need to extend the isotopes list in the param object to include all
+        # elements of formulas in the DB or alternatively remove some entries from DB before proceeding
         db_con <- DBI::dbConnect(RSQLite::SQLite(), formula_db)
         sf_db <- ifelse(class(db_con)=="SQLiteConnection", TRUE, FALSE)
       }
@@ -271,7 +274,6 @@ InterpretMSSpectrum <- function(
         # adaptive algorithm to compute isotopic pattern on the fly and fill sf_db over time...
         miss_iso <- is.na(out[,"m0"])
         if (any(miss_iso)) {
-          #browser()
           out[miss_iso,4:11] <- plyr::ldply(out[miss_iso,"Formula"], function(fml) { 
             matrix(t(GetIsotopeDistribution(fml=fml, res=30000, n=3, ele_vec = param$allowed_elements)), nrow=1) 
           })
@@ -456,10 +458,8 @@ InterpretMSSpectrum <- function(
       global_err <- NULL
       local_check <- 0
     }
-    #browser()
-    
+
     # evaluate main peaks
-    #browser()
     isomain <- DetermineIsomainPeaks(spec=spec, int_cutoff=0.03, precursor=precursor, ionization=param$ionization, ionmode=param$ionmode, limit=max_isomain_peaks)
     
     # # modify spectra if no good [M+H] is found but alternative adduct hypothesis instead
@@ -522,7 +522,6 @@ InterpretMSSpectrum <- function(
       
       # obtain most likely combination
       #rdisop_res <<- rdisop_res
-      #browser()
       rdisop_res_list <- ScoreFormulaCombination(rdisop_res, nl_vec=nl_vec, punish_invalid=0.5, punish_S=0.2, punish_nonplausible=0.5, return_rank=NA, neutral_loss_cutoff=param$neutral_loss_cutoff, substitutions=param$substitutions, silent=silent)
       time_elapse <- c(time_elapse, Sys.time())
       

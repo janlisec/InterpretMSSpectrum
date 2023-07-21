@@ -54,3 +54,29 @@ testthat::test_that(
     testthat::expect_equal(fmr_sum6[,10], 0.51)
   }
 )
+
+testthat::test_that(
+  desc = "findMAIN plot returns expected result",
+  code = {
+    # avoid creating a Rplots.pdf in testthat folder
+    pdf(NULL)
+    esi_spectrum <- InterpretMSSpectrum::esi_spectrum
+    fmr <- InterpretMSSpectrum::findMAIN(esi_spectrum)
+    vdiffr::expect_doppelganger(
+      title = "findMAIN_Plot_01",
+      fig = function() plot(fmr)
+    )
+  }
+)
+
+testthat::test_that(
+  desc = "findMAIN print returns expected result",
+  code = {
+    esi_spectrum <- InterpretMSSpectrum::esi_spectrum
+    fmr <- InterpretMSSpectrum::findMAIN(esi_spectrum)
+    suppressMessages({
+      #testthat::expect_equal(prod(dim(print(fmr))), 336)
+      testthat::expect_output(print(fmr), "157.0502")
+    })
+  }
+)
