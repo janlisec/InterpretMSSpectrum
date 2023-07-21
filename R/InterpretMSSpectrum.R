@@ -46,7 +46,7 @@
 #' utils::data(apci_spectrum)
 #' 
 #' # (otional) provide information of a correct peak as a character containing
-#' name, formula and ion mass -- separated by ',' as shown below
+#' # name, formula and ion mass -- separated by ',' as shown below
 #' cp <- "Glutamic acid (3TMS), C14H33NO4Si3, 364.1790"
 #' 
 #' # (otional) provide a database of known peaks

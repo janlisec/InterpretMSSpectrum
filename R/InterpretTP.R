@@ -12,6 +12,7 @@
 #'
 #' @inheritDotParams InterpretMSSpectrum
 #' @param fml A chemical formula of the standard used for transformation product generation.
+#' @param param Keyword or parameter list, similar as in \link{InterpretMSSpectrum}.
 #'
 #' @return An annotated plot of the mass spectrum and detailed information 
 #'     within the console. Main result, list of final candidate formulas and 
@@ -21,8 +22,7 @@
 #' # load test data
 #' utils::data(apci_spectrum)
 #'
-#' # provide information of a correct peak (if you know) as a character containing
-#' # name, formula and ion mass -- separated by ', ' as shown below
+#' # provide information of a correct peak (if you know) as character
 #' cp <- "Glutamic acid (3TMS), C14H33NO4Si3, 364.1790"
 #'
 #' # provide database of known peaks and correct peak
@@ -36,7 +36,7 @@
 #' fdb <- system.file("extdata", "APCI_min.db", package = "InterpretMSSpectrum")
 #'
 #' # apply function providing above arguments (dppm is set to 0.5 to reduce run time)
-#' InterpretTP(fml = "C14H33NO4Si3", spec=apci_spectrum, param="APCIpos", correct_peak=cp, met_db=mdb, formula_db=fdb)
+#' InterpretTP(fml = "C14H33NO4Si3", spec=apci_spectrum, param="APCIpos")
 #'
 #' @export
 #'
@@ -52,7 +52,7 @@ InterpretTP <- function(fml=NULL, param="APCIpos", ...) {
   # however, to be more flexible this parameter set can be provided directly as a list
   param.default <- InterpretMSSpectrum::param.default
   
-  ele <- CorMID::CountChemicalElements(x = fml)
+  ele <- CountChemicalElements(x = fml)
   
   # now modify values of the default parameter set according to the provided option in 'param'
   if (is.list(param)) {

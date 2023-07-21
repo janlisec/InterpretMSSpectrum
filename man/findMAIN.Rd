@@ -2,6 +2,8 @@
 % Please edit documentation in R/findMAIN.r
 \name{findMAIN}
 \alias{findMAIN}
+\alias{plot.findMAIN}
+\alias{print.findMAIN}
 \title{findMAIN.}
 \usage{
 findMAIN(
@@ -16,6 +18,10 @@ findMAIN(
   mainpkthr = 0.005,
   collapseResults = TRUE
 )
+
+\method{plot}{findMAIN}(x, rank = 1, correct_mass = NULL, ...)
+
+\method{print}{findMAIN}(x, ...)
 }
 \arguments{
 \item{spec}{A mass spectrum. Either a matrix or data frame, the first two columns of which 
@@ -48,6 +54,14 @@ or 'NULL' for default set (see \code{\link{Adducts}})}
 \item{collapseResults}{If a neutral mass hypothesis was found more than once (due to multiple 
 adducts suggesting the same neutral mass), return only the one with the highest adduct peak. 
 Should normally kept at \code{TRUE}, the default.}
+
+\item{x}{Object of class findMAIN.}
+
+\item{rank}{Rank of the suggestion to plot (can be a numeric vector).}
+
+\item{correct_mass}{If provided will indicate correct suggestion by green color.}
+
+\item{...}{Further parameters.}
 }
 \value{
 A list-like 'findMAIN' object for which 'print', 'summary' and 'plot' methods are available.
@@ -70,7 +84,7 @@ utils::data(esi_spectrum, package = "InterpretMSSpectrum")
 fmr <- InterpretMSSpectrum::findMAIN(esi_spectrum)
 plot(fmr)
 head(summary(fmr))
-InterpretMSSpectrum(fmr[[1]], precursor=263, param="ESIpos")
+InterpretMSSpectrum::InterpretMSSpectrum(fmr[[1]], precursor=263, param="ESIpos")
 fmr <- InterpretMSSpectrum::findMAIN(esi_spectrum[6:9,], adducthyp = "[M+H]+")
 plot(fmr)
 
@@ -80,7 +94,7 @@ InterpretMSSpectrum:::findiso(spec)
 # allow a double charged adduct hypothesis (not standard)
 fmr <- InterpretMSSpectrum::findMAIN(spec, adducthyp = c("[M+H]+", "[M+2H]2+"))
 summary(fmr)
-plot(fmr, rank = 1)
+plot(fmr, rank = 1:4)
 plot(fmr, rank = 2)
 
 # add the correct M+H to this spectrum as a minor peak

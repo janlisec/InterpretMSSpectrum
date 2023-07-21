@@ -42,7 +42,7 @@ list is returned.}
 \item{param}{Either a list of parameters or a character shortcut indicating a predefined 
 set. Currently 'APCIpos', 'ESIpos' and 'ESIneg' are supported as shortcuts. If a list
 is provided, list elements will overwrite similar named entries from the list that
-can be acessed using utils::data(param.default, package = "InterpretMSSpectrum").}
+can be accessed using utils::data(param.default, package = "InterpretMSSpectrum").}
 
 \item{formula_db}{A pre calculated database of sum formulas and their isotopic fine 
 structures can be used to extremely speed up the function.}
@@ -70,24 +70,25 @@ For further details refer to and if using please cite
     mass range may take several days.
 }
 \examples{
-# load test data
+# load APCI test data
 utils::data(apci_spectrum)
 
-# provide information of a correct peak (if you know) as a character containing
-# name, formula and ion mass -- separated by ', ' as shown below
+# (otional) provide information of a correct peak as a character containing
+# name, formula and ion mass -- separated by ',' as shown below
 cp <- "Glutamic acid (3TMS), C14H33NO4Si3, 364.1790"
 
-# provide database of known peaks and correct peak
+# (otional) provide a database of known peaks
 mdb <- data.frame(
   "Name" = c("Glutamic acid (3TMS)", "other peak with same sum formula"),
   "Formula" = c("C14H33NO4Si3", "C14H33NO4Si3"),
   "M+H" = c(364.179, 364.179), stringsAsFactors = FALSE, check.names = FALSE
 )
 
-# provide a database of precalculated formulas to speed up the process
+# (otional) provide a database of precalculated formulas to speed up the process
 fdb <- system.file("extdata", "APCI_min.db", package = "InterpretMSSpectrum")
 
-# apply function providing above arguments (dppm is set to 0.5 to reduce run time)
+# apply function providing above arguments which will print to the console
+# and open a new plot
 InterpretMSSpectrum(spec=apci_spectrum, correct_peak=cp, met_db=mdb, formula_db=fdb)
 
 }

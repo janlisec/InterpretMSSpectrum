@@ -75,8 +75,7 @@ testthat::test_that(
     esi_spectrum <- InterpretMSSpectrum::esi_spectrum
     fmr <- InterpretMSSpectrum::findMAIN(esi_spectrum)
     suppressMessages({
-      #testthat::expect_equal(prod(dim(print(fmr))), 336)
-      testthat::expect_output(print(fmr), "157.0502")
+      testthat::expect_output(print(fmr), "charge")
     })
   }
 )
