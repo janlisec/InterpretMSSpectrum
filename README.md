@@ -4,6 +4,7 @@
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/InterpretMSSpectrum)](https://CRAN.R-project.org/package=InterpretMSSpectrum)
 [![R-CMD-check](https://github.com/janlisec/InterpretMSSpectrum/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/janlisec/InterpretMSSpectrum/actions/workflows/R-CMD-check.yaml)
+[![codecov](https://codecov.io/gh/janlisec/InterpretMSSpectrum/branch/main/graph/badge.svg?token=NSY6DITZVH)](https://codecov.io/gh/janlisec/InterpretMSSpectrum)
 <!-- badges: end -->
 
 The goal of **InterpretMSSpectrum** is to provides a set of R functions to annotate
@@ -12,17 +13,19 @@ derived data in positive and negative ionization mode.
 
 ## Installation
 
-You can install the development version of InterpretMSSpectrum from 
-[GitHub](https://github.com/) or
-[CRAN](https://cran.r-project.org/package=InterpretMSSpectrum) with:
+You can install the 
+[CRAN](https://cran.r-project.org/package=InterpretMSSpectrum) or the 
+development version of InterpretMSSpectrum from 
+[GitHub](https://github.com/)
+with:
 
 ``` r
+# install the CRAN version als usual
+install.packages("InterpretMSSpectrum")
+
 # devtools is required to install from GitHub
 # install.packages("devtools")
 devtools::install_github("janlisec/InterpretMSSpectrum")
-
-# install the CRAN version als usual
-install.packages("InterpretMSSpectrum")
 ```
 
 ## Example
