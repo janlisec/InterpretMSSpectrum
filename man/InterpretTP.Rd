@@ -14,22 +14,22 @@ InterpretTP(fml = NULL, param = "APCIpos", ...)
 \item{...}{
   Arguments passed on to \code{\link[=InterpretMSSpectrum]{InterpretMSSpectrum}}
   \describe{
-    \item{\code{spec}}{A 2-column matrix of mz/int pairs. If spec=NULL then \code{InterpretMSSpectrum} 
+    \item{\code{spec}}{A 2-column matrix of mz/int pairs. If spec=NULL then \code{InterpretMSSpectrum}
 tries to read data from clipboard (i.e. two columns copied from an Excel spreadsheet).}
-    \item{\code{precursor}}{The ion (m/z) from spec closest to this mass will be considered as 
-precursor (can be nominal, i.e. if precursor=364 then 364.1234 would be selected from 
+    \item{\code{precursor}}{The ion (m/z) from spec closest to this mass will be considered as
+precursor (can be nominal, i.e. if precursor=364 then 364.1234 would be selected from
 spectrum if it is closest).}
-    \item{\code{correct_peak}}{For testing purposes. A character in the form of "name, formula, mz" 
+    \item{\code{correct_peak}}{For testing purposes. A character in the form of "name, formula, mz"
 to evaluate spectra against. Note! Separating character is ', '.}
-    \item{\code{met_db}}{A metabolite DB (e.g. GMD or internal) can be provided to search for 
+    \item{\code{met_db}}{A metabolite DB (e.g. GMD or internal) can be provided to search for
 candidates comparing M+H ions (cf. Examples).}
-    \item{\code{typical_losses_definition}}{A file name (e.g. D:/BuildingBlocks_GCAPCI.txt) from 
-where to load relevant neutral losses (cf. Details). Alternatively an data frame with 
+    \item{\code{typical_losses_definition}}{A file name (e.g. D:/BuildingBlocks_GCAPCI.txt) from
+where to load relevant neutral losses (cf. Details). Alternatively an data frame with
 columns 'Name', 'Formula' and 'Mass'.}
-    \item{\code{silent}}{Logical. If TRUE no plot is generated and no output except final candidate 
+    \item{\code{silent}}{Logical. If TRUE no plot is generated and no output except final candidate
 list is returned.}
     \item{\code{dppm}}{Specifies ppm error for Rdisop formula calculation.}
-    \item{\code{formula_db}}{A pre calculated database of sum formulas and their isotopic fine 
+    \item{\code{formula_db}}{A pre calculated database of sum formulas and their isotopic fine
 structures can be used to extremely speed up the function.}
   }}
 }
