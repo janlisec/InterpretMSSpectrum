@@ -18,6 +18,7 @@ Description: High resolution mass spectrometry yields often large data
     negative ionization mode.
 License: GPL-3
 URL: <doi:10.1021/acs.analchem.6b02743>
+git_url: https://github.com/janlisec/InterpretMSSpectrum
 Depends:
     R (>= 2.10.0)
 Imports:
