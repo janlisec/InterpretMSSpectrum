@@ -51,6 +51,7 @@ check_correct_peak <- function(x = NULL, isotopes = NULL, silent = TRUE) {
   return(x)
 }
 
+#' @name update_local_check
 #' @keywords internal
 #' @noRd
 update_local_check <- function(local_check, correct_peak, rdisop_res, nval=0) {
@@ -64,6 +65,7 @@ update_local_check <- function(local_check, correct_peak, rdisop_res, nval=0) {
   return(local_check)
 }
 
+#' @name check_param
 #' @keywords internal
 #' @noRd
 check_param <- function(x = NULL) {
@@ -122,6 +124,7 @@ check_param <- function(x = NULL) {
   
 }
 
+#' @name check_met_db
 #' @keywords internal
 #' @noRd
 check_met_db <- function(x = NULL, isotopes = NULL, silent = TRUE) {
@@ -143,8 +146,18 @@ check_met_db <- function(x = NULL, isotopes = NULL, silent = TRUE) {
       met_db[, "Formula"] <- as.character(met_db[, "Formula"])
       met_db[, "M+H"] <- as.numeric(met_db[, "M+H"])
       met_db <- met_db[!is.na(met_db[, "M+H"]), , drop = FALSE]
-      if (nrow(met_db) == 0) test <- TRUE else met_db <- met_db[!(is.na(met_db[, "Formula"]) | met_db[, "Formula"] == ""), , drop = FALSE]
-      if (nrow(met_db) == 0) test <- TRUE else met_db <- met_db[!enviPat::check_chemform(isotopes = isotopes, met_db[, "Formula"])$warning, , drop = FALSE]
+      if (nrow(met_db) == 0) {
+        test <- TRUE 
+      } else {
+        # remove rows with empty Formula 
+        met_db <- met_db[!(is.na(met_db[, "Formula"]) | met_db[, "Formula"] == ""), , drop = FALSE]
+      }
+      if (nrow(met_db) == 0) {
+        test <- TRUE
+      } else {
+        # remove rows with invalid Formula 
+        met_db <- met_db[!enviPat::check_chemform(isotopes = isotopes, met_db[, "Formula"])$warning, , drop = FALSE]
+      }
       if (nrow(met_db) == 0) test <- TRUE
     }
     if (test) {
@@ -218,4 +231,3 @@ check_neutral_losses <- function(x = NULL, ionization = c("APCI", "ESI"), isotop
   neutral_losses[, "Formula"] <- enviPat::check_chemform(isotopes = isotopes, neutral_losses[, "Formula"])[, "new_formula"]
   return(neutral_losses)
 }
-  
