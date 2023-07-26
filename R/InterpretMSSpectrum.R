@@ -105,20 +105,6 @@ InterpretMSSpectrum <- function(
   neutral_losses <- check_neutral_losses(x = typical_losses_definition, isotopes = param$isotopes, silent = silent)
   
   # Internal FUNCTIONS ----
-  ReadSpecClipboard <- function() {
-    # source could be Excel (German/English) or DA directly
-    spec <- readLines("clipboard")
-    spec <- gsub("\t", " ", spec) # replace Tabs
-    if (length(grep("[^[:digit:],/. ]", spec[1])) == 1) spec <- spec[-1] # strip header if present
-    spec <- gsub(",", ".", spec) # replace Colons
-    spec <- gsub(" +$", "", spec) # trim white space end
-    spec <- gsub("^ +", "", spec) # trim white space start
-    spec <- t(as.matrix(sapply(spec, function(x) {
-      as.numeric(strsplit(x, " ")[[1]])
-    }))) # convert to numeric matrix
-    if (ncol(spec) >= 3) spec <- spec[, -1]
-    return(spec)
-  }
   GetFragmentData <- function(M0 = NULL, spec = NULL, n = 2, iso_mass = 1.003355) {
     # try to get reasonable isotope peaks for M0 from spectrum
     p <- sapply(0:n, function(dmz) {
