@@ -13,9 +13,11 @@ A spectrum as two-column matrix.
 Read a mass spectrum from the windows clipboard.
 }
 \examples{
-\donttest{
-  x <- InterpretMSSpectrum::apci_spectrum
-  write.table(x, "clipboard", sep="\t", row.names=FALSE)
-  InterpretMSSpectrum::ReadSpecClipboard()
+\dontrun{
+  if (length(grep("Windows", sessionInfo()$running))==1) {
+    x <- InterpretMSSpectrum::apci_spectrum
+    write.table(x, "clipboard", sep="\t", row.names=FALSE)
+    InterpretMSSpectrum::ReadSpecClipboard()
+  }
 }
 }
