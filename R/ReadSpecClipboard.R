@@ -3,10 +3,12 @@
 #' @return A spectrum as two-column matrix.
 #' @export
 #' @examples
-#' \donttest{
+#' \dontrun{
 #'   x <- InterpretMSSpectrum::apci_spectrum
-#'   write.table(x, "clipboard", sep="\t", row.names=FALSE)
-#'   InterpretMSSpectrum::ReadSpecClipboard()
+#'   if (length(grep("Windows", sessionInfo()$running))==1) {
+#'     write.table(x, "clipboard", sep="\t", row.names=FALSE)
+#'     InterpretMSSpectrum::ReadSpecClipboard()
+#'   }
 #' }
 ReadSpecClipboard <- function() {
   # source could be Excel (German/English) or DA directly

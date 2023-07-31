@@ -1,21 +1,20 @@
 Type: Package
 Package: InterpretMSSpectrum
 Title: Interpreting High Resolution Mass Spectra
-Version: 1.4.1
-Date: 2023-07-21
+Version: 1.4.2
+Date: 2023-07-26
 Authors@R: c(
     person("Jan", "Lisec", , "jan.lisec@bam.de", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-1220-2286")),
     person("Jaeger", "Carsten", , "carsten.jaeger@bam.de", role = "aut")
   )
 Maintainer: Jan Lisec <jan.lisec@bam.de>
-Description: High resolution mass spectrometry yields often large data
-    sets of spectra from compounds which are not present in available
-    libraries. These spectra need to be annotated and
-    interpreted.'InterpretMSSpectrum' provides a set of functions to
-    perform such tasks for Electrospray-Ionization and
-    Atmospheric-Pressure-Chemical-Ionization derived data in positive and
-    negative ionization mode.
+Description: High resolution mass spectrometry yields often large data sets of 
+    spectra from compounds which are not present in available libraries. These 
+    spectra need to be annotated and interpreted.
+    'InterpretMSSpectrum' provides a set of functions to perform such tasks for 
+    Electrospray-Ionization and Atmospheric-Pressure-Chemical-Ionization derived 
+    data in positive and negative ionization mode.
 License: GPL-3
 URL: <doi:10.1021/acs.analchem.6b02743>
 git_url: https://github.com/janlisec/InterpretMSSpectrum
