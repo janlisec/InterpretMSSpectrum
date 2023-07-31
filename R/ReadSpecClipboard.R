@@ -4,14 +4,14 @@
 #' @export
 #' @examples
 #' \dontrun{
-#'   if (length(grep("Windows", sessionInfo()$running))==1) {
+#'   if (length(grep("Windows", utils::sessionInfo()$running))==1) {
 #'     x <- InterpretMSSpectrum::apci_spectrum
 #'     write.table(x, "clipboard", sep="\t", row.names=FALSE)
 #'     InterpretMSSpectrum::ReadSpecClipboard()
 #'   }
 #' }
 ReadSpecClipboard <- function() {
-  stopifnot(length(grep("Windows", sessionInfo()$running))==1)
+  stopifnot(length(grep("Windows", utils::sessionInfo()$running))==1)
   # source could be Excel (German/English) or DA directly
   spec <- readLines("clipboard")
   spec <- gsub("\t", " ", spec) # replace Tabs

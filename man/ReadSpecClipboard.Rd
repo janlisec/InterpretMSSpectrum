@@ -14,7 +14,7 @@ Read a mass spectrum from the windows clipboard.
 }
 \examples{
 \dontrun{
-  if (length(grep("Windows", sessionInfo()$running))==1) {
+  if (length(grep("Windows", utils::sessionInfo()$running))==1) {
     x <- InterpretMSSpectrum::apci_spectrum
     write.table(x, "clipboard", sep="\t", row.names=FALSE)
     InterpretMSSpectrum::ReadSpecClipboard()
