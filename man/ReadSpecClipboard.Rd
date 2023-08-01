@@ -4,7 +4,10 @@
 \alias{ReadSpecClipboard}
 \title{ReadSpecClipboard.}
 \usage{
-ReadSpecClipboard()
+ReadSpecClipboard(con = "clipboard")
+}
+\arguments{
+\item{con}{A connection other than 'clipboard' can be provided.}
 }
 \value{
 A spectrum as two-column matrix.

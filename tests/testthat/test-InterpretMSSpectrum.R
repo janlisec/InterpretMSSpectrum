@@ -18,5 +18,9 @@ testthat::test_that(
     inp <- InterpretMSSpectrum::esi_spectrum    
     out <- InterpretMSSpectrum::InterpretMSSpectrum(spec=inp, precursor = 263.0534, param = "ESIneg", dppm = 1, silent=TRUE)
     testthat::expect_length(out, 6)
+    
+    # test the main output as snapshot test
+    testthat::expect_snapshot(InterpretMSSpectrum::InterpretMSSpectrum(spec=inp, correct_peak=cp, met_db=mdb, formula_db=fdb, silent=FALSE))
+    
   }
 )
