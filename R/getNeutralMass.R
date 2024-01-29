@@ -1,0 +1,40 @@
+#' @title getNeutralMass.
+#' @description \code{getNeutralMass} will return the neutral mass calculated for a measured m/z and a specified potential adduct.
+#' @details To achieve the task formulas are split into elements and counted using \link{CountChemicalElements}.
+#' @param m Measured m/z.
+#' @param adduct_name Name of potential adduct.
+#' @param adduct_rules data frame of possible adducts.
+#' @return Numeric vector.
+#'
+#' @examples
+#' InterpretMSSpectrum:::getNeutralMass()
+#' rules <- data.frame(
+#'   "name" = c("[M+1]+","[2M+1]+","[M+1]2+","[2M+1]2+","[M+2]+","[2M+2]+","[M+2]2+","[2M+2]2+"), 
+#'   "nmol" = c(1,2,1,2,1,2,1,2), 
+#'   "charge" = c(1,1,2,2,1,1,2,2), 
+#'   "massdiff" = c(1,1,1,1,2,2,2,2)
+#' )
+#' sapply(1:nrow(rules), function(i) { 
+#'   InterpretMSSpectrum:::getNeutralMass(100, rules[i,1], rules)
+#' })
+#'
+#' @keywords internal
+#' @noRd
+#'
+getNeutralMass <- function(
+  m=100, 
+  adduct_name = "[2M-2H]2-", 
+  adduct_rules=data.frame("name"="[2M-2H]2-", "nmol"=2, charge=2, massdiff=-2.014553)) 
+{
+  i <- which(adduct_rules[,"name"]==adduct_name)
+  if (any(i)) {
+    nmol <- adduct_rules[i,"nmol"]
+    charge <- abs(adduct_rules[i,"charge"])
+    massdiff <- adduct_rules[i,"massdiff"]
+  } else {
+    nmol <- 1
+    charge <- 1
+    massdiff <- 0
+  }
+  return(charge*m/nmol-massdiff)
+}

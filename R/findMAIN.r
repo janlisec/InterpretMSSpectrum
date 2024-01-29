@@ -152,10 +152,8 @@ findMAIN <- function(
       negative = Adducts$Negative
     )
     if (is.null(rules)) stop("unknown ionmode")
+    rules <- getRuleFromIonSymbol(rules)
     return(rules)
-  }
-  generateRules <- function(rules) {
-    getRuleFromIonSymbol(rules)
   }
   predictPeaksFromRuleset <- function(neutral_mass, ruleset) {
     r <- ruleset
@@ -199,10 +197,13 @@ findMAIN <- function(
   }
   findMatchingRules <- function(s, mz_test, dmz_adduct = NULL, rules, mzabs, ppm) {
     rules.found <- vector("numeric", nrow(s))
-    # [JL] to account for "[Mx]2+" hypotheses we need to adjust the expectedPeaks calculation for this double charge
-    # [JL] 2 lines modified on 20230622; set fac=1 to revert this change
-    fac <- ifelse(names(dmz_adduct) %in% rules[,"name"], rules[rules[,"name"]==names(dmz_adduct),"charge"], 1)
-    neutral_mass <- ifelse(is.null(dmz_adduct), mz_test, fac * mz_test - dmz_adduct)
+    # [JL]  on 20240126 neutral_mass calculation was put into a dedicated function, making the below modification obsolete
+    # # [JL] to account for "[Mx]2+" hypotheses we need to adjust the neutral mass calculation for this double charge to be correct in finding expectedPeaks 
+    # # [JL] 2 lines modified on 20230622; set fac=1 to revert this change
+    # fac <- ifelse(names(dmz_adduct) %in% rules[,"name"], rules[rules[,"name"]==names(dmz_adduct),"charge"], 1)
+    # neutral_mass <- ifelse(is.null(dmz_adduct), mz_test, fac * mz_test - dmz_adduct)
+    # browser()
+    neutral_mass <- getNeutralMass(m = mz_test, adduct_name = names(dmz_adduct), adduct_rules = rules)
     expectedPeaks <- predictPeaksFromRuleset(neutral_mass, rules)
     # cbind(rules, expectedPeaks)
     test.idx <- which(is.na(s[, "iso"]) | s[, "iso"] == 0)
@@ -341,11 +342,13 @@ findMAIN <- function(
     s.out[pk.idx, ][, "adduct"] <- adductname
     s.out[pk.idx, ][, "ppm"] <- ppm
     s.out[, "label"] <- s.out[, "adduct"]
-    fac <- ifelse(names(adducthyp) %in% rules[,"name"], rules[rules[,"name"]==names(adducthyp),"charge"], 1)
+    #fac <- ifelse(names(adducthyp) %in% rules[,"name"], rules[rules[,"name"]==names(adducthyp),"charge"], 1)
+    #browser()
     scores.out <- cbind(
       adductmz = adductmz,
       adducthyp = adducthyp,
-      neutral_mass = fac * adductmz - adducthyp,
+      #neutral_mass = fac * adductmz - adducthyp,
+      neutral_mass = getNeutralMass(m = adductmz, adduct_name = names(adducthyp), adduct_rules = ruleset),
       scores
     )
     attr(s.out, "scores") <- scores.out
@@ -410,6 +413,12 @@ findMAIN <- function(
   # [JL] ensure that 'adducthyp' becomes a named vector independent on the number of hypoteses (failed for n=1)
   adducthyp <- getRuleFromIonSymbol(adducthyp)
   adducthyp <- stats::setNames(object = adducthyp[,"massdiff"], nm = adducthyp[,"name"])
+  # establish rules
+  if (is.null(rules)) {
+    rules <- getDefaultRules(ionmode)
+  } else {
+    rules <- getRuleFromIonSymbol(rules)
+  }
   if (nrow(s) == 1) {
     ## return something useful for spectra with only one line
     warning(sprintf("single-line spectrum - wild guessing %s", round(adducthyp[1]), 4))
@@ -421,11 +430,12 @@ findMAIN <- function(
       label = NA
     )
     score <- scoreMatchingRules(NULL)
-    fac <- unname(sapply(names(adducthyp), function(x) { generateRules(x)[,"charge"] }))
+    #fac <- unname(sapply(names(adducthyp), function(x) { generateRules(x)[,"charge"] }))
     attr(s.out, "scores") <- data.frame(
       adductmz = s[, 1],
-      adducthyp = adducthyp[1],
-      neutral_mass = fac[1] * s[, 1] - adducthyp[1],
+      adducthyp = names(adducthyp)[1],
+      #neutral_mass = fac[1] * s[, 1] - adducthyp[1],
+      neutral_mass = getNeutralMass(m = s[, 1], adduct_name = names(adducthyp)[1], adduct_rules = rules),
       score
     )
     out <- list(s.out)
@@ -435,13 +445,9 @@ findMAIN <- function(
     return(out)
   }
   if (nrow(s) == 2) {
+    ## test only first adducthyp for poor specs
     adducthyp <- adducthyp[1]
   }
-  # test only first adducthyp for poor specs
-  if (is.null(rules)) {
-    rules <- getDefaultRules(ionmode)
-  }
-  rules <- generateRules(rules)
   prec <- adductmz
   if (is.null(prec)) {
     prec <- getMainPeaks(s, intthr = mainpkthr, ms2spec = ms2spec)
@@ -474,6 +480,7 @@ findMAIN <- function(
       adduct_hyp_charge = rules[rules["name"]==names(prectab[i, 2]),"charge"]
     )
   })
+  #browser()
   out <- lapply(1:length(matchingRules), function(i) {
     formatResults(s, matchingRules[[i]], rules, prectab[i, ][, 1], prectab[i, ][, 2], scores[[i]])
   })
