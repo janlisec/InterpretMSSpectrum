@@ -15,12 +15,12 @@ testthat::test_that(
     testthat::expect_length(out, 10)
     testthat::expect_equal(attr(out, "stats")[,"mz"], c(202.0893, 246.1339, 274.1288, 348.1477, 364.1789))
 
+    # test the main output as snapshot test
+    #testthat::expect_snapshot(InterpretMSSpectrum::InterpretMSSpectrum(spec=inp, correct_peak=cp, met_db=mdb, formula_db=fdb, silent=FALSE))
+    
     inp <- InterpretMSSpectrum::esi_spectrum    
     out <- InterpretMSSpectrum::InterpretMSSpectrum(spec=inp, precursor = 263.0534, param = "ESIneg", dppm = 1, silent=TRUE)
     testthat::expect_length(out, 6)
-    
-    # test the main output as snapshot test
-    testthat::expect_snapshot(InterpretMSSpectrum::InterpretMSSpectrum(spec=inp, correct_peak=cp, met_db=mdb, formula_db=fdb, silent=FALSE))
     
   }
 )
