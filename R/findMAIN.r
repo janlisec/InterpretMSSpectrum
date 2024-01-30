@@ -10,7 +10,7 @@
 #'     adduct ions, multimers and in-source fragments \code{[M+H]+, [M+Na]+, [2M+H]+, [M+H-H2O]+}, 
 #'     making it difficult to decide on the compound's neutral mass. This functions aims 
 #'     at determining the main adduct ion and its type (protonated, sodiated etc.) of a spectrum, 
-#'     allowing subsequent database searches e.g. using MS-FINDER, SIRIUS or similar.
+#'     allowing subsequent database searches e.g. using MS-FINDER, SIRIUS or similar.     
 #'
 #' @param spec A mass spectrum. Either a matrix or data frame, the first two columns of which 
 #'     are assumed to contain the 'mz' and 'intensity' values, respectively.
@@ -35,6 +35,20 @@
 #'     Should normally kept at \code{TRUE}, the default.
 #'
 #' @return A list-like 'findMAIN' object for which 'print', 'summary' and 'plot' methods are available.
+#'     Each list element represents a potential spectra annotation, ranked according to 
+#'     a combined score. The spectrum is annotated with columns indicating the determined
+#'     isotopic groups (isogr) and their likely charge. Further, information on the potential 
+#'     set of adducts and their ppm error is attached.
+#'     The score aims to integrate all this information using formula S=sum(w_i x s_i).
+#'     In short, we sum up i weighted score components (currently i=4). Currently these
+#'     components are calculated based on the explained intensity (adduct sets which
+#'     annotate a higher amount of the total spectrum intensity are better), the mass error
+#'     (adduct sets with lower mass error are better), the support by isotopic peaks
+#'     (adduct sets with fitting isotopes are better) and the number of adducts (adduct 
+#'     sets with a larger number of adducts are better).
+#'     The individual scores for each adduct set are attached as an attribute to the
+#'     respective list element and can be easily observed by applying the 'summary' or 
+#'     the 'plot' function on the 'findMAIN' object.
 #' 
 #' @references Jaeger C, Meret M, Schmitt CA, Lisec J (2017), <doi:10.1002/rcm.7905>.
 #'
@@ -54,6 +68,7 @@
 #' # allow a double charged adduct hypothesis (not standard)
 #' fmr <- InterpretMSSpectrum::findMAIN(spec, adducthyp = c("[M+H]+", "[M+2H]2+"))
 #' summary(fmr)
+#' attr(fmr[[1]],"scores")
 #' plot(fmr, rank = 1:4)
 #' plot(fmr, rank = 2)
 #' 
@@ -284,9 +299,9 @@ findMAIN <- function(
     isoCharge <- s[, 5][pk.idx]
     # [JL] 2 lines modified on 20230622
     #ruleCharge <- c(ruleset[r.idx, ][, 3], if (is.null(matchingRules[[4]])) NULL else 1)
-    ruleCharge <- ruleset[r.idx, ][, 3]
+    ruleCharge <- abs(ruleset[r.idx, ][, 3])
     # [JL] for a double charged molecule as prec we need to set the default value respectively
-    if (!is.null(matchingRules[[4]])) ruleCharge <- c(ruleCharge, adduct_hyp_charge)
+    if (!is.null(matchingRules[[4]])) ruleCharge <- c(ruleCharge, abs(adduct_hyp_charge))
     isNA <- is.na(isoCharge)
     isoChargeVals <- rep(isoNeutral, length(pk.idx))
     isoChargeVals[!isNA & isoCharge == ruleCharge] <- 1
