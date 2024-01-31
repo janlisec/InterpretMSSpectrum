@@ -276,7 +276,13 @@ InterpretMSSpectrum <- function(
     # set colors for spectra plot (isomain peaks get a red color)
     tmp.col <- rep(1, nrow(spec))
     tmp.col[which(spec[, 1] %in% isomain)] <- 2
-    PlotSpec(x = spec, cols = tmp.col, txt = data.frame("mz" = rdisop_res_best[, "Mass"], "Formula" = rdisop_res_best[, "Formula"]), neutral_losses = neutral_losses, neutral_loss_cutoff = param$neutral_loss_cutoff, substitutions = param$substitutions, ionization = param$ionization)
+    fml_expr <- sapply(rdisop_res_best[, "Formula"], function(x) {
+      x <- CountChemicalElements(x)
+      x[x==1] <- ""
+      paste0(names(x),"[", x, "]", collapse="*")
+    },USE.NAMES = FALSE)
+    fml_expr <- gsub("[[]]", "", fml_expr)
+    PlotSpec(x = spec, cols = tmp.col, txt = data.frame("mz" = rdisop_res_best[, "Mass"], "Formula" = fml_expr, "expr"=TRUE), neutral_losses = neutral_losses, neutral_loss_cutoff = param$neutral_loss_cutoff, substitutions = param$substitutions, ionization = param$ionization)
     graphics::mtext(paste("Remaining combinations:", length(rdisop_res_list)), line = -1.2, adj = 0, side = 3, col = grDevices::grey(0.5))
     graphics::mtext(best_cand, line = -2.4, adj = 0, side = 3, col = best_cand_col)
     if (!is.null(correct_peak)) {
