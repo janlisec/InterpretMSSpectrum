@@ -65,6 +65,20 @@ Should normally kept at \code{TRUE}, the default.}
 }
 \value{
 A list-like 'findMAIN' object for which 'print', 'summary' and 'plot' methods are available.
+    Each list element represents a potential spectra annotation, ranked according to 
+    a combined score. The spectrum is annotated with columns indicating the determined
+    isotopic groups (isogr) and their likely charge. Further, information on the potential 
+    set of adducts and their ppm error is attached.
+    The score aims to integrate all this information using formula S=sum(w_i x s_i).
+    In short, we sum up i weighted score components (currently i=4). Currently these
+    components are calculated based on the explained intensity (adduct sets which
+    annotate a higher amount of the total spectrum intensity are better), the mass error
+    (adduct sets with lower mass error are better), the support by isotopic peaks
+    (adduct sets with fitting isotopes are better) and the number of adducts (adduct 
+    sets with a larger number of adducts are better).
+    The individual scores for each adduct set are attached as an attribute to the
+    respective list element and can be easily observed by applying the 'summary' or 
+    the 'plot' function on the 'findMAIN' object.
 }
 \description{
 \code{findMAIN} will evaluate an ESI spectrum for the potential main adducts, 
@@ -94,6 +108,7 @@ InterpretMSSpectrum:::findiso(spec)
 # allow a double charged adduct hypothesis (not standard)
 fmr <- InterpretMSSpectrum::findMAIN(spec, adducthyp = c("[M+H]+", "[M+2H]2+"))
 summary(fmr)
+attr(fmr[[1]],"scores")
 plot(fmr, rank = 1:4)
 plot(fmr, rank = 2)
 
