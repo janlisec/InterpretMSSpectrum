@@ -1,0 +1,96 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# InterpretMSSpectrum
+
+<!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/InterpretMSSpectrum)](https://CRAN.R-project.org/package=InterpretMSSpectrum)
+[![R-CMD-check](https://github.com/janlisec/InterpretMSSpectrum/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/janlisec/InterpretMSSpectrum/actions/workflows/R-CMD-check.yaml)
+[![codecov](https://codecov.io/gh/janlisec/InterpretMSSpectrum/branch/main/graph/badge.svg?token=NSY6DITZVH)](https://codecov.io/gh/janlisec/InterpretMSSpectrum)
+<!-- badges: end -->
+
+The goal of **InterpretMSSpectrum** is to provides a set of R functions to annotate
+mass spectra from Electrospray-Ionization and Atmospheric-Pressure-Chemical-Ionization 
+derived data in positive and negative ionization mode.
+
+## Installation
+
+You can install the [CRAN](https://cran.r-project.org/package=InterpretMSSpectrum) 
+version of **InterpretMSSpectrum** using:
+```
+install.packages("InterpretMSSpectrum")
+```
+or the development version from [GitHub](https://github.com/) using:
+```
+# devtools is required to install from GitHub
+# install.packages("devtools")
+devtools::install_github("janlisec/InterpretMSSpectrum")
+```
+
+## Example
+
+In the simplest case **InterpretMSSpectrum** will provide an informed guess
+for the potential sum formula of an arbitrary mass spectrum.
+
+```{r exmpl1}
+# load APCI test data
+apci_spectrum <- InterpretMSSpectrum::apci_spectrum
+
+# find the most probable sum formula for the spectrum
+# (will print to the console and open a new plot)
+InterpretMSSpectrum::InterpretMSSpectrum(spec=apci_spectrum)
+```
+
+The function can be tweaked with numerous parameters to limit the results, speed
+up calculations and more. 
+
+The other high level function of the package allows to predict the precursor of 
+ESI spectra.
+
+```{r exmpl2}
+# load ESI test data
+esi_spectrum <- InterpretMSSpectrum::esi_spectrum
+
+# find the most likely precursor for the spectrum
+(fmr <- InterpretMSSpectrum::findMAIN(spec=esi_spectrum))
+plot(fmr)
+```
+
+Also `findMAIN` provides multiple user options to use individual adduct lists, 
+thresholds and rule sets.
+
+Finally, `InterpretMSSpectrum` provides a number of helper functions, some of 
+which are listed below.
+
+```{r exmpl3}
+# to count the chemical elements within a character vector of sum formulas
+InterpretMSSpectrum::CountChemicalElements(x = "C6H12O6")
+sapply(c("C6H12O6", "CH3Cl"), InterpretMSSpectrum::CountChemicalElements, ele=c("C","H","O"))
+
+# to get the exact mass for a sum formula
+InterpretMSSpectrum::get_exactmass(c("C6H12O6", "Na", "H1"))
+
+# to check if one formula is contained in another (i.e. as fragment)
+InterpretMSSpectrum:::is.subformula("H2O", "HCOOH")
+```
+
+## Detailed documentation
+
+You might read the publications on either
+[APCI spectra processing](https://doi.org/10.1021/acs.analchem.6b02743) which
+explains the idea of using the in source fragments for prediction of potential 
+sum formulas or on
+[ESI spectra processing](https://doi.org/10.1002/rcm.7905) which 
+explains the strategy to infer the correct precursor of ESI mass spectra.
