@@ -51,8 +51,11 @@
 #'tmp <- data.frame("Name"=c("Loss1","Loss2"),"Formula"=c("",""),"Mass"=c(90.05,27.995))
 #'PlotSpec(x=s, neutral_losses=tmp)
 #'
-#'# provide additional color and annotaion information per peak
+#'# provide additional color and annotation information per peak
 #'PlotSpec(x=s, cols=1+(s[,2]>0.1), txt=data.frame("x"=s[s[,2]>0.1,1],"txt"="txt"))
+#'
+#'# annotate a sum formula
+#'PlotSpec(x=s, txt=data.frame("x"=s[which.max(s[,2]),1],"txt"="C[6]~H[12]~O[6]","expr"=TRUE))
 #'
 #'# simulate a Sodium adduct to the spectrum (and annotate using substitutions)
 #'p <- which.max(s[,2])
@@ -163,7 +166,13 @@ PlotSpec <- function(x=NULL, masslab=0.1, rellab=FALSE, cutoff=0.01, cols=NULL, 
     # print text (sum formulas)
     if (!is.null(txt)) {
       tmp.y <- sapply(txt[,1],function(y){x[which.min(abs(x[,1]-y)),2]})
-      graphics::text(x=txt[,1], y=tmp.y, pos=sapply(tmp.y, function(y) {ifelse(y>0.9*max(x[xf,2]),1,3)}), labels=txt[,2], col=4, cex=0.8)
+      if (ncol(txt)>=3 && colnames(txt)[3]=="expr") {
+        for (i in 1:nrow(txt)) {
+          graphics::text(x=txt[i,1], y=tmp.y[i], pos=ifelse(tmp.y[i]>0.9*max(x[xf,2]),1,3), labels=ifelse(txt[i,3], eval(parse(text = paste0("expression(", txt[i,2], ")"))), txt[i,2]), col=4, cex=0.8)
+        }
+      } else {
+        graphics::text(x=txt[,1], y=tmp.y, pos=sapply(tmp.y, function(y) {ifelse(y>0.9*max(x[xf,2]),1,3)}), labels=txt[,2], col=4, cex=0.8)
+      }
     }
 
     # print masses

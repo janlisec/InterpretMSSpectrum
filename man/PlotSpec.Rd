@@ -86,8 +86,11 @@ PlotSpec(x=s, masslab=NULL, neutral_losses=NA)
 tmp <- data.frame("Name"=c("Loss1","Loss2"),"Formula"=c("",""),"Mass"=c(90.05,27.995))
 PlotSpec(x=s, neutral_losses=tmp)
 
-# provide additional color and annotaion information per peak
+# provide additional color and annotation information per peak
 PlotSpec(x=s, cols=1+(s[,2]>0.1), txt=data.frame("x"=s[s[,2]>0.1,1],"txt"="txt"))
+
+# annotate a sum formula
+PlotSpec(x=s, txt=data.frame("x"=s[which.max(s[,2]),1],"txt"="C[6]~H[12]~O[6]","expr"=TRUE))
 
 # simulate a Sodium adduct to the spectrum (and annotate using substitutions)
 p <- which.max(s[,2])
