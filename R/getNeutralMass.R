@@ -14,9 +14,21 @@
 #'   "charge" = c(1,1,2,2,1,1,2,2), 
 #'   "massdiff" = c(1,1,1,1,2,2,2,2)
 #' )
-#' sapply(1:nrow(rules), function(i) { 
+#' nm <- sapply(1:nrow(rules), function(i) { 
 #'   InterpretMSSpectrum:::getNeutralMass(100, rules[i,1], rules)
 #' })
+#' cbind(mz=100, nm, rules)
+#' 
+#' # set up testing rules for negaive ionization mode
+#' rules_neg <- rules
+#' rules_neg$name <- gsub("[+]", "-", rules_neg$name)
+#' rules_neg$charge <- -1 * rules_neg$charge
+#' rules_neg$massdiff <- -1 * rules_neg$massdiff
+#' nm <- sapply(1:nrow(rules_neg), function(i) { 
+#'   InterpretMSSpectrum:::getNeutralMass(100, rules_neg[i,1], rules_neg)
+#' })
+#' cbind(mz=100, nm, rules_neg)
+#' 
 #'
 #' @keywords internal
 #' @noRd
