@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/InterpretMSSpectrum)](https://CRAN.R-project.org/package=InterpretMSSpectrum)
 [![R-CMD-check](https://github.com/janlisec/InterpretMSSpectrum/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/janlisec/InterpretMSSpectrum/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/janlisec/InterpretMSSpectrum/branch/main/graph/badge.svg?token=NSY6DITZVH)](https://codecov.io/gh/janlisec/InterpretMSSpectrum)
+[![codecov](https://app.codecov.io/gh/janlisec/InterpretMSSpectrum/branch/main/graph/badge.svg?token=NSY6DITZVH)](https://app.codecov.io/gh/janlisec/InterpretMSSpectrum)
 <!-- badges: end -->
 
 The goal of **InterpretMSSpectrum** is to provides a set of R functions to annotate
@@ -88,9 +88,7 @@ InterpretMSSpectrum:::is.subformula("H2O", "HCOOH")
 
 ## Detailed documentation
 
-You might read the publications on either
-[APCI spectra processing](https://doi.org/10.1021/acs.analchem.6b02743) which
-explains the idea of using the in source fragments for prediction of potential 
-sum formulas or on
-[ESI spectra processing](https://doi.org/10.1002/rcm.7905) which 
+You might read the publications on either [APCI spectra processing](https://doi.org/10.1021/acs.analchem.6b02743)
+which explains the idea of using the in source fragments for prediction of potential 
+sum formulas or on [ESI spectra processing](https://doi.org/10.1002/rcm.7905) which 
 explains the strategy to infer the correct precursor of ESI mass spectra.

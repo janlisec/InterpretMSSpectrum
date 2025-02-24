@@ -8,7 +8,7 @@
 [![CRAN
 status](https://www.r-pkg.org/badges/version/InterpretMSSpectrum)](https://CRAN.R-project.org/package=InterpretMSSpectrum)
 [![R-CMD-check](https://github.com/janlisec/InterpretMSSpectrum/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/janlisec/InterpretMSSpectrum/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/janlisec/InterpretMSSpectrum/branch/main/graph/badge.svg?token=NSY6DITZVH)](https://codecov.io/gh/janlisec/InterpretMSSpectrum)
+[![codecov](https://app.codecov.io/gh/janlisec/InterpretMSSpectrum/branch/main/graph/badge.svg?token=NSY6DITZVH)](https://app.codecov.io/gh/janlisec/InterpretMSSpectrum)
 <!-- badges: end -->
 
 The goal of **InterpretMSSpectrum** is to provides a set of R functions
@@ -84,7 +84,7 @@ InterpretMSSpectrum::InterpretMSSpectrum(spec=apci_spectrum)
     #> Time elapsed during individual processing steps...
     #> Time differences in secs
     #>  FormulaGen   ScoreFilt   Plausible NeutralLoss    PathEval        Plot 
-    #>     23.8203      0.0005      0.0950      0.1035      0.2840      0.0632
+    #>     29.8296      0.0005      0.1235      0.1222      0.3729      0.0662
 
 The function can be tweaked with numerous parameters to limit the
 results, speed up calculations and more.
