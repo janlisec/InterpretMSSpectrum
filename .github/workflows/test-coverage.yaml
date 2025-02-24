@@ -4,10 +4,9 @@ on:
   push:
     branches: [main, master]
   pull_request:
+    branches: [main, master]
 
-name: test-coverage.yaml
-
-permissions: read-all
+name: test-coverage
 
 jobs:
   test-coverage:
@@ -34,24 +33,23 @@ jobs:
             clean = FALSE,
             install_path = file.path(normalizePath(Sys.getenv("RUNNER_TEMP"), winslash = "/"), "package")
           )
-          print(cov)
           covr::to_cobertura(cov)
         shell: Rscript {0}
 
-      - uses: codecov/codecov-action@v5
+      - uses: codecov/codecov-action@v4
         with:
-          fail_ci_if_error: true # optional (default = false)
-          files: ./coverage1.xml,./coverage2.xml # optional
-          flags: unittests # optional
-          name: codecov-umbrella # optional
+          # Fail if error if not on PR, or if on PR and token is given
+          fail_ci_if_error: ${{ github.event_name != 'pull_request' || secrets.CODECOV_TOKEN }}
+          file: ./cobertura.xml
+          plugin: noop
+          disable_search: true
           token: ${{ secrets.CODECOV_TOKEN }}
-          verbose: true # optional (default = false)
 
       - name: Show testthat output
         if: always()
         run: |
           ## --------------------------------------------------------------------
-          find '${{ runner.temp }}/package' -name 'testthat.Rout*' -exec cat '{}' \; || true
+          find ${{ runner.temp }}/package -name 'testthat.Rout*' -exec cat '{}' \; || true
         shell: bash
 
       - name: Upload test results
@@ -60,9 +58,8 @@ jobs:
         with:
           name: coverage-test-failures
           path: ${{ runner.temp }}/package
-          
+
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-          
