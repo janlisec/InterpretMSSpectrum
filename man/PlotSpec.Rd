@@ -84,7 +84,7 @@ PlotSpec(x=s, rellab=364.1789)
 PlotSpec(x=s, masslab=NULL, neutral_losses=NA)
 
 # provide individual neutral loss set
-tmp <- data.frame("Name"=c("Loss1","Loss2"),"Formula"=c("",""),"Mass"=c(90.05,27.995))
+tmp <- data.frame("Name"=c("Loss1","C2H6"),"Formula"=c("",""),"Mass"=c(90.05,27.995))
 PlotSpec(x=s, neutral_losses=tmp)
 
 # provide additional color and annotation information per peak

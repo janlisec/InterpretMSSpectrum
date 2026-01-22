@@ -49,7 +49,7 @@
 #'PlotSpec(x=s, masslab=NULL, neutral_losses=NA)
 #'
 #'# provide individual neutral loss set
-#'tmp <- data.frame("Name"=c("Loss1","Loss2"),"Formula"=c("",""),"Mass"=c(90.05,27.995))
+#'tmp <- data.frame("Name"=c("Loss1","C2H6"),"Formula"=c("",""),"Mass"=c(90.05,27.995))
 #'PlotSpec(x=s, neutral_losses=tmp)
 #'
 #'# provide additional color and annotation information per peak
@@ -137,8 +137,8 @@ PlotSpec <- function(x=NULL, masslab=0.1, rellab=FALSE, cutoff=0.01, cols=NULL, 
     if (is.null(cols)) cols <- rep(1, nrow(x))
 
     # set up main plot
-    opar <- graphics::par(no.readonly = TRUE)
-    on.exit(graphics::par(opar))
+    opar <- graphics::par("mar")
+    on.exit(graphics::par("mar" = opar))
     graphics::par("mar"=c(2,2,0.5,0)+0.5)
     if (is.null(xlim)) {
       xlim <- c(floor(min(x[xf,1])), ceiling(max(x[xf,1])))
@@ -164,7 +164,11 @@ PlotSpec <- function(x=NULL, masslab=0.1, rellab=FALSE, cutoff=0.01, cols=NULL, 
           l <- cbind(row(dmz)[upper.tri(dmz)][l],col(dmz)[upper.tri(dmz)][l])
           for (j in 1:nrow(l)) {
             graphics::lines(x[xf,][isomain,][l[j,],], lty=2, col=grDevices::grey(0.8))
-            graphics::text(x=mean(x[xf,][isomain,][l[j,],1]), y=mean(x[xf,][isomain,][l[j,],2]), labels=neutral_losses[i,1], col=grDevices::grey(0.8), cex=graphics::par("cex")*0.8)
+            if (!inherits(try(fml2expr(neutral_losses[i,1]), silent=TRUE), "try-error")) {
+              graphics::text(x=mean(x[xf,][isomain,][l[j,],1]), y=mean(x[xf,][isomain,][l[j,],2]), labels=fml2expr(neutral_losses[i,1]), col=grDevices::grey(0.8), cex=graphics::par("cex")*0.8)  
+            } else {
+              graphics::text(x=mean(x[xf,][isomain,][l[j,],1]), y=mean(x[xf,][isomain,][l[j,],2]), labels=neutral_losses[i,1], col=grDevices::grey(0.8), cex=graphics::par("cex")*0.8)
+            }
           }
         }
       }

@@ -87,28 +87,51 @@
 </g>
 <g clip-path='url(#cpMzYuMDB8NzEyLjgwfDE0LjQwfDU0MC4wMA==)'>
 <polyline points='612.79,493.31 673.31,33.87 ' style='stroke-width: 0.75; stroke: #CCCCCC; stroke-dasharray: 4.00,4.00;' />
-<text x='643.05' y='266.90' text-anchor='middle' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='19.21px' lengthAdjust='spacingAndGlyphs'>CH4</text>
+<text x='634.24' y='266.05' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='6.94px' lengthAdjust='spacingAndGlyphs'>C</text>
+<text x='641.18' y='266.05' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='6.94px' lengthAdjust='spacingAndGlyphs'>H</text>
+<text x='648.11' y='267.83' style='font-size: 6.72px; fill: #CCCCCC; font-family: sans;' textLength='3.74px' lengthAdjust='spacingAndGlyphs'>4</text>
 <polyline points='333.36,420.82 612.79,493.31 ' style='stroke-width: 0.75; stroke: #CCCCCC; stroke-dasharray: 4.00,4.00;' />
-<text x='473.07' y='460.37' text-anchor='middle' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='32.01px' lengthAdjust='spacingAndGlyphs'>O-DMS</text>
+<text x='453.16' y='460.37' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='7.47px' lengthAdjust='spacingAndGlyphs'>O</text>
+<text x='462.41' y='460.37' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='7.46px' lengthAdjust='spacingAndGlyphs'>−</text>
+<text x='471.65' y='460.37' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='6.94px' lengthAdjust='spacingAndGlyphs'>D</text>
+<text x='478.58' y='460.37' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='8.00px' lengthAdjust='spacingAndGlyphs'>M</text>
+<text x='486.58' y='460.37' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='6.41px' lengthAdjust='spacingAndGlyphs'>S</text>
 <polyline points='227.68,455.43 673.31,33.87 ' style='stroke-width: 0.75; stroke: #CCCCCC; stroke-dasharray: 4.00,4.00;' />
-<text x='450.49' y='247.95' text-anchor='middle' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='55.47px' lengthAdjust='spacingAndGlyphs'>TMS-O-CHO</text>
+<text x='414.94' y='247.95' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='5.86px' lengthAdjust='spacingAndGlyphs'>T</text>
+<text x='420.80' y='247.95' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='8.00px' lengthAdjust='spacingAndGlyphs'>M</text>
+<text x='428.80' y='247.95' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='6.41px' lengthAdjust='spacingAndGlyphs'>S</text>
+<text x='436.98' y='247.95' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='7.46px' lengthAdjust='spacingAndGlyphs'>−</text>
+<text x='446.22' y='247.95' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='7.47px' lengthAdjust='spacingAndGlyphs'>O</text>
+<text x='455.47' y='247.95' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='7.46px' lengthAdjust='spacingAndGlyphs'>−</text>
+<text x='464.71' y='247.95' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='6.94px' lengthAdjust='spacingAndGlyphs'>C</text>
+<text x='471.64' y='247.95' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='6.94px' lengthAdjust='spacingAndGlyphs'>H</text>
+<text x='478.58' y='247.95' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='7.47px' lengthAdjust='spacingAndGlyphs'>O</text>
 <polyline points='61.40,501.92 333.36,420.82 ' style='stroke-width: 0.75; stroke: #CCCCCC; stroke-dasharray: 4.00,4.00;' />
-<text x='197.38' y='464.80' text-anchor='middle' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='53.36px' lengthAdjust='spacingAndGlyphs'>TMS-Adduct</text>
+<text x='166.79' y='464.80' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='5.86px' lengthAdjust='spacingAndGlyphs'>T</text>
+<text x='172.66' y='464.80' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='8.00px' lengthAdjust='spacingAndGlyphs'>M</text>
+<text x='180.66' y='464.80' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='6.41px' lengthAdjust='spacingAndGlyphs'>S</text>
+<text x='188.84' y='464.80' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='7.46px' lengthAdjust='spacingAndGlyphs'>−</text>
+<text x='198.08' y='464.80' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='6.41px' lengthAdjust='spacingAndGlyphs'>A</text>
+<text x='204.48' y='464.80' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='5.34px' lengthAdjust='spacingAndGlyphs'>d</text>
+<text x='209.82' y='464.80' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='5.34px' lengthAdjust='spacingAndGlyphs'>d</text>
+<text x='215.16' y='464.80' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='5.34px' lengthAdjust='spacingAndGlyphs'>u</text>
+<text x='220.50' y='464.80' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='4.80px' lengthAdjust='spacingAndGlyphs'>c</text>
+<text x='225.30' y='464.80' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='2.67px' lengthAdjust='spacingAndGlyphs'>t</text>
 <polyline points='333.36,420.82 673.31,33.87 ' style='stroke-width: 0.75; stroke: #CCCCCC; stroke-dasharray: 4.00,4.00;' />
-<text x='503.33' y='230.65' text-anchor='middle' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='41.07px' lengthAdjust='spacingAndGlyphs'>TMS-O-H</text>
+<text x='474.98' y='230.65' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='5.86px' lengthAdjust='spacingAndGlyphs'>T</text>
+<text x='480.85' y='230.65' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='8.00px' lengthAdjust='spacingAndGlyphs'>M</text>
+<text x='488.85' y='230.65' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='6.41px' lengthAdjust='spacingAndGlyphs'>S</text>
+<text x='497.03' y='230.65' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='7.46px' lengthAdjust='spacingAndGlyphs'>−</text>
+<text x='506.27' y='230.65' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='7.47px' lengthAdjust='spacingAndGlyphs'>O</text>
+<text x='515.51' y='230.65' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='7.46px' lengthAdjust='spacingAndGlyphs'>−</text>
+<text x='524.75' y='230.65' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='6.94px' lengthAdjust='spacingAndGlyphs'>H</text>
 <polyline points='227.68,455.43 333.36,420.82 ' style='stroke-width: 0.75; stroke: #CCCCCC; stroke-dasharray: 4.00,4.00;' />
-<text x='280.52' y='441.43' text-anchor='middle' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='14.41px' lengthAdjust='spacingAndGlyphs'>CO</text>
+<text x='273.32' y='441.43' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='6.94px' lengthAdjust='spacingAndGlyphs'>C</text>
+<text x='280.25' y='441.43' style='font-size: 9.60px; fill: #CCCCCC; font-family: sans;' textLength='7.47px' lengthAdjust='spacingAndGlyphs'>O</text>
 <text x='227.68' y='458.32' text-anchor='middle' style='font-size: 8.40px; font-family: sans;' textLength='35.04px' lengthAdjust='spacingAndGlyphs'>246.1339</text>
 <text x='333.36' y='423.71' text-anchor='middle' style='font-size: 8.40px; font-family: sans;' textLength='35.04px' lengthAdjust='spacingAndGlyphs'>274.1288</text>
 <text x='673.31' y='36.76' text-anchor='middle' style='font-size: 8.40px; font-family: sans;' textLength='35.04px' lengthAdjust='spacingAndGlyphs'>364.1789</text>
 <text x='677.09' y='384.68' text-anchor='middle' style='font-size: 8.40px; font-family: sans;' textLength='35.04px' lengthAdjust='spacingAndGlyphs'>365.1802</text>
 <text x='680.85' y='465.15' text-anchor='middle' style='font-size: 8.40px; font-family: sans;' textLength='35.04px' lengthAdjust='spacingAndGlyphs'>366.1776</text>
-</g>
-<defs>
-  <clipPath id='cpNTkuMDR8Njg5Ljc2fDU5LjA0fDUwMi41Ng=='>
-    <rect x='59.04' y='59.04' width='630.72' height='443.52' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpNTkuMDR8Njg5Ljc2fDU5LjA0fDUwMi41Ng==)'>
 </g>
 </svg>
