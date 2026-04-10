@@ -10,7 +10,7 @@ testthat::test_that(
         smiles <- "OS(=O)(=O)c1ccc(cc1)C(CC(=O)O)CC(=O)O"
         plot.new()
         plot.window(xlim=c(0,200), ylim=c(0,100))
-        fioRa:::renderSMILES(smiles, kekulise=FALSE)
+        InterpretMSSpectrum:::renderSMILES(smiles, kekulise=FALSE)
       }
     )
     vdiffr::expect_doppelganger(
@@ -20,7 +20,7 @@ testthat::test_that(
         smiles <- "OS(=O)(=O)c1ccc(cc1)C(CC(=O)O)CC(=O)O"
         plot.new()
         plot.window(xlim=c(0,200), ylim=c(0,100))
-        fioRa:::renderSMILES(smiles, kekulise=TRUE)
+        InterpretMSSpectrum:::renderSMILES(smiles, kekulise=TRUE)
       }
     )
   }
@@ -33,7 +33,7 @@ testthat::test_that(
     on.exit(grDevices::dev.off())
     
     graphics::plot(1:10, 1:10)
-    coords <- fioRa:::square_subplot_coord(5, 5, w = 0.2)
+    coords <- InterpretMSSpectrum:::square_subplot_coord(5, 5, w = 0.2)
     
     testthat::expect_type(coords, "double")
     testthat::expect_length(coords, 4)
@@ -47,7 +47,7 @@ testthat::test_that(
     on.exit(grDevices::dev.off())
     
     graphics::plot(0:10, 0:10)
-    coords <- fioRa:::square_subplot_coord(5, 5, w = 0.2)
+    coords <- InterpretMSSpectrum:::square_subplot_coord(5, 5, w = 0.2)
     
     center_x <- (coords[1] + coords[2]) / 2
     testthat::expect_equal(center_x, 5, tolerance = 1e-6)
