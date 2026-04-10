@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # InterpretMSSpectrum
 
 <!-- badges: start -->
+[![Static Badge](https://img.shields.io/github/r-package/v/janlisec/InterpretMSSpectrum)](https://img.shields.io/github/r-package/v/janlisec/InterpretMSSpectrum)
 [![CRAN status](https://www.r-pkg.org/badges/version/InterpretMSSpectrum)](https://CRAN.R-project.org/package=InterpretMSSpectrum)
 [![R-CMD-check](https://github.com/janlisec/InterpretMSSpectrum/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/janlisec/InterpretMSSpectrum/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://app.codecov.io/gh/janlisec/InterpretMSSpectrum/branch/main/graph/badge.svg?token=NSY6DITZVH)](https://app.codecov.io/gh/janlisec/InterpretMSSpectrum)
@@ -68,11 +69,12 @@ esi_spectrum <- InterpretMSSpectrum::esi_spectrum
 plot(fmr)
 ```
 
-Also `findMAIN` provides multiple user options to use individual adduct lists, 
+Also `findMAIN()` provides multiple user options to use individual adduct lists, 
 thresholds and rule sets.
 
-Finally, `InterpretMSSpectrum` provides a number of helper functions, some of 
-which are listed below.
+Finally, **InterpretMSSpectrum** contains a number of helper functions, to count
+chemical elements in sum formulas, calculate the exact mass of a sum formula or
+check if a sum formula is a potential subset of another.
 
 ```{r exmpl3}
 # to count the chemical elements within a character vector of sum formulas
@@ -84,6 +86,19 @@ InterpretMSSpectrum::get_exactmass(c("C6H12O6", "Na", "H1"))
 
 # to check if one formula is contained in another (i.e. as fragment)
 InterpretMSSpectrum:::is.subformula("H2O", "HCOOH")
+```
+
+The plotting function `PlotSpec()` used in this package is quite versatile and 
+can annotate mass spectra in multiple ways, including structural formulas.
+
+```{r exmpl4, fig.retina=4}
+txt <- data.frame(
+  "x"=apci_spectrum[order(apci_spectrum[,2],decreasing=TRUE)[1:3],1],
+  "txt"=c("C6H12O6", "some text", "H2SO3"),
+  "SMILES" = c("O=CC(O)C(O)C(O)C(O)CO", "", "OS(=O)(=O)"),
+  "w" = rep(0.4,3)
+)
+InterpretMSSpectrum::PlotSpec(x=apci_spectrum, txt=txt)
 ```
 
 ## Detailed documentation
