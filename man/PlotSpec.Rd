@@ -97,10 +97,13 @@ PlotSpec(x=s, cols=1+(s[,2]>0.1), txt=data.frame("x"=s[s[,2]>0.1,1],"txt"="txt")
 PlotSpec(x=s, txt=data.frame("x"=s[which.max(s[,2]),1],"txt"="C6H12O6"))
 
 # or annotate a mix of sum formula and text
-txt <- data.frame("x"=s[order(s[,2],decreasing=TRUE)[1:3],1],"txt"=c("C6H12O6", "some text", "H2SO3"))
+txt <- data.frame(
+ "x" = s[order(s[,2],decreasing=TRUE)[1:3],1],
+ "txt" = c("C6H12O6", "some text", "H2SO3")
+)
 PlotSpec(x=s, txt=txt)
 
-# if 'txt' contains a column SMILES with valid SMILES codes, they will be rendered
+# if 'txt' contains a column SMILES with valid SMILES codes, they will be rendered additionally
 txt[,"SMILES"] <- c("O=CC(O)C(O)C(O)C(O)CO", "", "OS(=O)(=O)")
 PlotSpec(x=s, txt=txt)
 txt[,"w"] <- rep(0.4,3)

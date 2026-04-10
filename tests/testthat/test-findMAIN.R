@@ -59,6 +59,7 @@ testthat::test_that(
   desc = "findMAIN plot returns expected result",
   code = {
     testthat::skip_on_cran()
+    testthat::skip_on_ci()
     # avoid creating a Rplots.pdf in testthat folder
     pdf(NULL)
     esi_spectrum <- InterpretMSSpectrum::esi_spectrum
